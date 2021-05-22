@@ -7,6 +7,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String name, password;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  ////// for form
   String text = ' ';
   bool changeButton = false;
   @override
@@ -14,6 +17,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
+          key: _formKey,
           child: Column(
             children: [
               Image.asset(
@@ -48,6 +52,15 @@ class _LoginPageState extends State<LoginPage> {
                           text = value;
                         });
                       },
+                      validator: (String value) {
+                        if (value.isEmpty) {
+                          return "name field cannot be empty";
+                        }
+                        return null;
+                      },
+                      onSaved: (String value) {
+                        name = value;
+                      },
                     ),
                     TextFormField(
                       decoration: InputDecoration(
@@ -55,6 +68,14 @@ class _LoginPageState extends State<LoginPage> {
                         hintText: "Enter your password",
                       ),
                       obscureText: true,
+                      validator: (String value) {
+                        if (value.isEmpty) {
+                          return "Password field cannot be empty";
+                        } else if (value.length < 6) {
+                          return "Password cannot be less then 7 digits";
+                        }
+                        return null;
+                      },
                     ),
                     SizedBox(
                       height: 20,
@@ -66,16 +87,18 @@ class _LoginPageState extends State<LoginPage> {
                           BorderRadius.circular(changeButton ? 50 : 8),
                       child: InkWell(
                         onTap: () async {
-                          setState(() {
-                            changeButton = true;
-                          });
-                          await Future.delayed(Duration(seconds: 2));
-                          await Navigator.pushNamed(
-                              context, MyRoutes.homeRoute);
-                          setState(() {
-                            ///it will move it on its back state
-                            changeButton = false;
-                          });
+                          if (_formKey.currentState.validate()) {
+                            setState(() {
+                              changeButton = true;
+                            });
+                            await Future.delayed(Duration(seconds: 2));
+                            await Navigator.pushNamed(
+                                context, MyRoutes.homeRoute);
+                            setState(() {
+                              ///it will move it on its back state
+                              changeButton = false;
+                            });
+                          } //if end bracket
                         },
                         child: AnimatedContainer(
                           duration: Duration(seconds: 1),
