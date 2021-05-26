@@ -8,7 +8,6 @@ import 'package:flutter_catalog_app/widgets/drawer.dart';
 
 import '../models/catalog.dart';
 import '../widgets/drawer.dart';
-import '../widgets/item_widget.dart';
 
 class HomePage extends StatefulWidget {
   @override
