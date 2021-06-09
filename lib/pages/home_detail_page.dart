@@ -12,8 +12,11 @@ class HomeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyTheme.creamColor,
-      appBar: AppBar(),
+      backgroundColor: Colors.white,
+      // backgroundColor: MyTheme.creamColor,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
       bottomNavigationBar: ButtonBar(
         alignment: MainAxisAlignment.spaceBetween,
         buttonPadding: EdgeInsets.only(right: 20),
@@ -36,7 +39,10 @@ class HomeDetailPage extends StatelessWidget {
             Hero(
               tag: Key(catalog.id
                   .toString()), //tag in hero connect the screens/widgets and show animation and both should contain same tag
-              child: Image.network(catalog.image),
+              child: Image.network(
+                catalog.image,
+                fit: BoxFit.cover,
+              ),
             ).p16().h32(context),
             Expanded(
               child: VxArc(
@@ -44,6 +50,9 @@ class HomeDetailPage extends StatelessWidget {
                 edge: VxEdge.TOP,
                 arcType: VxArcType.CONVEY,
                 child: Container(
+                  color: MyTheme.creamColor,
+                  //color: Colors.white,
+                  padding: EdgeInsets.only(top: 60),
                   width: context.screenWidth,
                   child: Column(children: [
                     catalog.name.text.xl
