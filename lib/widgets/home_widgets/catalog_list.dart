@@ -66,7 +66,7 @@ class CatalogItem extends StatelessWidget {
                       backgroundColor: MaterialStateProperty.all(MyTheme
                           .darkBluishColor) //whether button pressed or not but you have to change the color
                       ),
-                  child: "Buy".text.make())
+                  child: "Add to Cart".text.make())
             ],
           )
         ],
