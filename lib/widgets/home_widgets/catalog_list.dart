@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_catalog_app/models/catalog.dart';
 import 'package:flutter_catalog_app/pages/home_detail_page.dart';
+import 'package:flutter_catalog_app/utils/routes.dart';
 import 'package:flutter_catalog_app/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -44,13 +45,15 @@ class CatalogItem extends StatelessWidget {
       Hero(
           tag: Key(catalog.id
               .toString()), //tag in hero connect the screens/widgets and show animation and both should contain same tag
-          child: CatalogImage(image: catalog.image)),
+          child: CatalogImage(
+            image: catalog.image,
+          )),
       Expanded(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          catalog.name.text.lg.color(MyTheme.darkBluishColor).bold.make(),
+          catalog.name.text.lg.color(context.theme.buttonColor).bold.make(),
           catalog.desc.text
               .textStyle(context.captionStyle)
               .make(), //make  the color light from name color
@@ -61,18 +64,20 @@ class CatalogItem extends StatelessWidget {
             children: [
               "\$${catalog.price}".text.bold.xl.make(),
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, MyRoutes.cartRoute);
+                  },
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(MyTheme
-                          .darkBluishColor) //whether button pressed or not but you have to change the color
+                      backgroundColor: MaterialStateProperty.all(context.theme
+                          .buttonColor) //whether button pressed or not but you have to change the color
                       ),
-                  child: "Buy".text.make())
+                  child: "Add to Cart".text.make())
             ],
           )
         ],
       ))
     ]))
-        .white
+        .color(context.cardColor)
         .roundedLg
         .square(150)
         .make()

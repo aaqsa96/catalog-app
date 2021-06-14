@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_catalog_app/models/catalog.dart';
 import 'package:flutter_catalog_app/widgets/themes.dart';
@@ -12,7 +13,7 @@ class HomeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: context.theme.canvasColor,
       // backgroundColor: MyTheme.creamColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -25,11 +26,11 @@ class HomeDetailPage extends StatelessWidget {
           ElevatedButton(
                   onPressed: () {},
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(MyTheme
-                          .darkBluishColor) //whether button pressed or not but you have to change the color
+                      backgroundColor: MaterialStateProperty.all(context.theme
+                          .buttonColor) //whether button pressed or not but you have to change the color
                       ),
-                  child: "Buy".text.make())
-              .wh(100, 30)
+                  child: "Add to Cart".text.make())
+              .wh(110, 30)
         ],
       ).p32(),
       body: SafeArea(
@@ -50,13 +51,13 @@ class HomeDetailPage extends StatelessWidget {
                 edge: VxEdge.TOP,
                 arcType: VxArcType.CONVEY,
                 child: Container(
-                  color: MyTheme.creamColor,
+                  color: context.theme.cardColor,
                   //color: Colors.white,
                   padding: EdgeInsets.only(top: 60),
                   width: context.screenWidth,
                   child: Column(children: [
-                    catalog.name.text.xl
-                        .color(MyTheme.darkBluishColor)
+                    catalog.name.text.xl3
+                        .color(context.theme.buttonColor)
                         .bold
                         .make(),
                     catalog.desc.text.xl
